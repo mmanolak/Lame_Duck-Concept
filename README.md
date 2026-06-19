@@ -82,35 +82,64 @@ These classify participants into archetypes — Consistent Altruist, Fair-Minded
 
 ## Repository structure
 
-<!-- TODO: confirm the layout. The repo currently has "Code and Apps/" and "oTree/".
-     Tell me which holds the runnable oTree app and what the other contains. -->
+The repository holds two oTree projects from different stages of development. `Code and Apps/` is the
+primary, systematically organized build (numbered intake → battery → treatments); `oTree/` contains the
+earlier, named-app versions. *(App-to-design annotations below are a best reading of the folder names —
+correct any that are off.)*
 
 ```
 Lame_Duck-Concept/
-├── oTree/              # TODO: the runnable oTree experiment app(s)?
-├── Code and Apps/      # TODO: supporting code / earlier versions?
-└── README.md
+├── Code and Apps/                     # Primary oTree project (sequential build)
+│   ├── app_00_personal_information/   # Participant intake / demographics
+│   ├── app_0_dictator/                # Battery — Dictator Game (altruism)
+│   ├── app_1_ultimatum/               # Battery — Ultimatum Game (negative reciprocity)
+│   ├── app_2_jod/                     # Battery — Joy of Destruction (baseline spite)
+│   ├── app_3_treatment1/              # Treatment 1 — Principal-Agent Control
+│   ├── app_4_treatment2a/             # Treatment 2 (variant a)
+│   ├── app_5_treatment2b/             # Treatment 2 (variant b)
+│   ├── app_6_treatment3/              # Treatment 3 — Betrayal (baseline)
+│   ├── app_7_rotation/                # Matching / role-rotation logic
+│   ├── app_8_reaction/                # Stage-2 retaliation decision
+│   ├── app_9_working_no_mods/         # Working sandbox version
+│   ├── requirements.txt · settings.py · shared_out.py
+│   └── db.sqlite3                     # local run artifact (usually git-ignored)
+└── oTree/                             # Earlier, named-app versions
+    ├── dictator/ · ultimatum/ · joy_of_destruction/   # Battery games
+    ├── representative/ · ultimate_representative/      # Stage-1 Representative role
+    ├── term_limit/                                     # Treatment 4 — Term Limit
+    ├── pretreatment_summary/ · dumb_luck/             # Supporting tasks
+    ├── Procfile · settings.py · shared_out.py · units.py
+    └── requirements.txt
 ```
 
 ## Installation & running
 
-<!-- TODO: confirm Python version, oTree version, and the exact commands you use. -->
+This is a standard [oTree](https://www.otree.org/) project; exact package versions are pinned in each
+folder's `requirements.txt`.
 
 ```bash
-# Requires Python <TODO> and oTree <TODO>
-pip install otree                 # or: pip install -r requirements.txt
-cd oTree                          # TODO: correct path to the app folder
-otree devserver                   # then open http://localhost:8000
+# From the primary project folder:
+cd "Code and Apps"
+pip install -r requirements.txt    # installs oTree and dependencies
+otree devserver                    # then open http://localhost:8000
 ```
 
 ## Project status & roadmap
 
-**Implemented:** <!-- TODO --> *(which treatments and/or the battery are coded, and what runs end-to-end today)*
+**Development is paused** — this is a research prototype, not a finished instrument. The design (the four
+notes above) is fully specified, and the oTree implementation is substantially scaffolded: the complete
+pre-experiment battery (Dictator, Ultimatum, Joy of Destruction) and Treatments 1–3 are built in
+`Code and Apps/`, with the Representative role and Term-Limit (Treatment 4) components in `oTree/`. The two
+app sets have **not yet been consolidated** into a single session flow, the Indefinite-Horizon treatment
+(Treatment 5) is not yet integrated, and the experiment has **not been run with human subjects**.
 
-**Planned:**
-- **LM-agent pre-testing** — evaluating small, open-weight language models (e.g., Gemma) as simulated participants to pilot and stress-test the design before human deployment.
-- **Human-subjects deployment** <!-- TODO: IRB status, if applicable -->.
-- **Open design questions** flagged in the proposals — e.g., possible survivorship/selection effects in Treatment 4.
+**If resumed:**
+- Consolidate the two projects into one clean session sequence (intake → battery → treatment → Stage 2).
+- LM-agent pre-testing — evaluating small, open-weight language models (e.g., Gemma) as simulated
+  participants to pilot and stress-test the design before human deployment.
+- Human-subjects deployment, with IRB review as applicable.
+- Resolve the open design questions flagged in the proposals — e.g., possible survivorship/selection
+  effects in Treatment 4.
 
 ## Documents
 
